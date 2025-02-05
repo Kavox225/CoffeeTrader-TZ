@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Accueil - CoffeeTrader TZ{% endblock %}
+
+{% block content %}
+    <div class="home-container">
+        <h1>Bienvenue sur CoffeeTrader TZ</h1>
+        <p>Gérez vos lots de café et vos commandes facilement et efficacement.</p>
+        <a href="{{ url_for('dashboard') }}" class="btn-primary">Accéder au Tableau de Bord</a>
+    </div>
+{% endblock %}

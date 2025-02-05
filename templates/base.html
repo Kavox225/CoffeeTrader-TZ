@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}CoffeeTrader TZ{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>CoffeeTrader TZ</h1>
+    </header>
+
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="{{ url_for('home') }}">🏠 Accueil</a></li>
+            <li><a href="{{ url_for('dashboard') }}">📊 Dashboard</a></li>
+            <li><a href="{{ url_for('lots_commandes') }}">📦 Lots & Commandes</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
