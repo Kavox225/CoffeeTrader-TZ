@@ -7,6 +7,31 @@ import yfinance as yf  # Ajouter cette ligne pour utiliser yfinance
 
 app = Flask(__name__)
 
+# Vérifier si la base de données existe et la créer si nécessaire
+if not os.path.exists("database.db"):
+    with sqlite3.connect("database.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS lots (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                origine TEXT,
+                quantite INTEGER,
+                prix_achat REAL,
+                date_achat TEXT
+            )
+        """)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS commandes (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                client TEXT,
+                quantite INTEGER,
+                prix_vente REAL,
+                date_commande TEXT
+            )
+        """)
+        conn.commit()
+
+        
 # Connexion à la base de données
 def get_db_connection():
     conn = sqlite3.connect('database.db')
@@ -146,4 +171,4 @@ def delete_commande(commande_id):
     return redirect(url_for('lots_commandes'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=10000)
