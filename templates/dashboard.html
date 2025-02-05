@@ -35,3 +35,17 @@
         </div>
     </div>
 {% endblock %}
+
+{% block head %}
+<!-- Lien vers le manifest -->
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+<!-- Enregistrement du service worker -->
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register("{{ url_for('static', filename='sw.js') }}")
+    .then(reg => console.log("Service Worker enregistré"))
+    .catch(err => console.log("Service Worker erreur :", err));
+}
+</script>
+{% endblock %}
